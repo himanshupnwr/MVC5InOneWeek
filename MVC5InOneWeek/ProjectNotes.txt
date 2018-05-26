@@ -1,0 +1,83 @@
+﻿Problesm with Asp.net Web Forms
+--------------------------------
+
+1.) Response Time
+2.) Bandwidth Consumption
+
+View state makes a page heavy so we need to remove it in order to reduce the size of the Page.
+
+HTML Customization
+--------------------
+Rather than generating HTML using server controls how about writing HTML directly and taking complete control over HTML
+
+DO NOT USE SERVER CONTROLS
+
+ASP>NET MVC Request Flow
+-------------------------
+1.) The first hit comes to the controller
+2.) Depending on the action Controller creates the object of the Model. 
+Model in turns calls the data access the data access layer which fetches data in the Model.
+
+3.) This data filled Model is then passed to the View for display purpose.
+
+Action Method
+---------------
+Action Method is simply a public method inside controller which accepts user's request and return some response
+
+Every public method will become action method automatically.
+If we want to make a method of a class as public but not action method then simply decorate it with Non Action Attribute
+
+Views
+-------
+In MVC Views and Controllers are not Tightly Coupled.
+One Action method can refer more than one view and one view can be referred by more than one action method.(keeping them in shared folder)
+
+Action Result
+--------------
+Action Result encapsulates response of a user request. In Asp.net MVC when end user makes a request it will be handled by controller action method. 
+Action Method will result ActionResult.
+
+HOW VIEW CREATES FINAL HTML
+------------------------------
+1.) View Function creates ViewResult of a View located in either Controller folder or shared folder
+2.) ViewResult internally creates the object of ViewPageActivator Class
+3.) ViewResult chooses the correct view engine and pass ViewPageActivator object as arguement to the View Engine's constructor.
+4.) ViewEngine creates the object of View Class
+5.) ViewResult invokes the RenderView method of View.
+
+ActionResult is an abstract class whereas ViewResult is grandchild of ActionResult.
+ViewResult is child of ViewResultBase and ViewResultBase is child of ActionResult.
+
+It is possible to invoke View function without Parameter the it will find the view with name "CurrentActionName".
+
+ViewData
+----------
+ViewData is a dictionary, which contains data to be passed between Controller and Views.
+
+@someexpression is termed as expression. It will simply display the value of expression on screen.
+@{..} is termed as scriptlets. It will be used when we want to write multiple executable statements. We can write any C# code between them.
+
+ViewData holds objects internally. Every time a new value is added into it, it gets boxed to object type. 
+So unboxing is required every time we extract a value out of it.
+
+ViewBag
+---------
+Viewbag is just a syntactic sugar for ViewData. ViewBag uses the dynamic feature of C# and makes ViewData dynamic. ViewBag internally uses ViewData.
+
+We can pass ViewData and get it as ViewBag.
+
+Problem with ViewData and ViewBag
+----------------------------------
+1.) Performance issues due to casting
+2.) No Type saftey and no comile time errors
+3.) No Proper connection between Data sent and Data Received
+
+Strongly Typed View
+--------------------
+@Model ApplicationName.Models.ModelClassName
+
+We can't make a View a strongly typed view of more than one Model.
+
+ViewModel
+------------
+ViewModel fits between Model and View and act as a data container for view.
