@@ -1,4 +1,5 @@
-﻿
+﻿@using MVC5InOneWeek.ViewModels
+@Model EmployeeListViewModel
 @{
     ViewBag.Title = "MyView";
 }
@@ -15,6 +16,7 @@
         Welcome to MVC 5 Step by Step learning
     </div>
 
+    @*Day -1 Coding Example
     <div>
 
         @{
@@ -32,6 +34,26 @@
             Employee Salary: @Model.Salary
         </span>
 
+    </div>*@
+
+    @*Day 2 - View Models*@
+
+    Hello @Model.UserName
+    <hr/>
+    <div>
+        <table border="1">
+            <tr>
+                <th>Employee Name</th>
+                <th>Salary</th>
+            </tr>
+            @foreach (EmployeeViewModel item in Model.Employees)
+            {
+            <tr>
+                <td>@item.EmployeeName</td>
+                <td style="background-color:@item.SalaryColor">@item.Salary</td>
+            </tr>
+            }
+        </table>
     </div>
 </body>
 </html>

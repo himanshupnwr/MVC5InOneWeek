@@ -81,3 +81,5 @@ We can't make a View a strongly typed view of more than one Model.
 ViewModel
 ------------
 ViewModel fits between Model and View and act as a data container for view.
+
+Every view will have its own view model. There should'nt be any connection between model and view model.
